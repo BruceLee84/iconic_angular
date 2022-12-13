@@ -1,0 +1,7 @@
+{
+  "name": "projectionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
