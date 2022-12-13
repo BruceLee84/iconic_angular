@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Ionic Pratice
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,8 +13,64 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
+  <ion-button (click)="showForm()">Add Product</ion-button>
+  <ion-button (click)="showGrid()">All Products</ion-button>
+
+
+  <ion-content *ngIf="showAddForm">
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  
+      <ion-item>
+        <ion-label position="floating">Name:</ion-label>
+        <ion-input type="text" formControlName="Name"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">price:</ion-label>
+        <ion-input type="text" formControlName="price"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating" >quantity:</ion-label>
+        <ion-input type="text" formControlName="quantity"></ion-input>
+      </ion-item>
+  
+      <ion-button type="submit">Add Product</ion-button>
+  
+    </form>
+  </ion-content>
+
+  <ion-content *ngIf="showProductsList;">
+    <ion-grid >
+      <ion-row>
+        <ion-col>No</ion-col>
+        <ion-col>Name</ion-col>
+        <ion-col>Price</ion-col>
+        <ion-col>Quantity</ion-col>
+        <ion-col>Action</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let p of productList; index as i">
+        <ion-col>{{i + 1}}</ion-col>
+        <ion-col>{{p.Name}}</ion-col>
+        <ion-col>{{p.price}}</ion-col>
+        <ion-col>{{p.quantity}}</ion-col>
+        <ion-col size="3">
+          <ion-button class="round" color="warning" (click)="ShowUpdateForm(i)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button class="round" color="danger"  (click)="delete(p)" (click) = 'showGrid()'>
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </ion-content>
+
+
+  <!-- <div id="container">
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  </div> -->
 </ion-content>
